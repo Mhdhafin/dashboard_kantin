@@ -8,6 +8,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mockery\Generator\StringManipulation\Pass\Pass;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
 {
@@ -68,11 +69,15 @@ class PaymentController extends Controller
     }
 
     $bill->save();
-    }
-
     toast('Pembayaran Berhasil Ditambahkan!', 'success');
 
     return redirect()->route('payments.index');
+    }
+
+   Alert::error('Jumlah Pembayaran Tidak Sesuai', 'Gagal Menambahkan Pembayaran');
+    return redirect()->back();
+
+   
 }
 
 

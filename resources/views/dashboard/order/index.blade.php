@@ -69,11 +69,11 @@
 
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                            Date
+                            Tanggal
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                            Actions
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -108,7 +108,7 @@
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                {{$order->created_at->format('d-m-Y')  }}
+                                {{ $order->order_date }} 
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">
                                 <div class="relative inline-block text-left">

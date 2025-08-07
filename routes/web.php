@@ -8,6 +8,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\RestoreBillController;
+use App\Http\Controllers\UserController;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Reseller;
@@ -58,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/export/payments', [ExportController::class, 'exportPayments'])->name('payments.export');
     Route::get('/export/orders', [ExportController::class, 'exportOrders'])->name('orders.export');
     Route::get('/export/bills', [ExportController::class, 'exportBills'])->name('bills.export');
+
+    Route::resource('/dashboard/users', UserController::class);
 });
 
 // Authentication

@@ -1,0 +1,131 @@
+@extends('layouts.main')
+
+
+@section('title', 'Profil')
+@section('subtitle', 'Kelola informasi akun anda')
+
+@section('content')
+
+        <!-- Main content -->
+        <div class="lg:pl-72">
+            <div class="xl:pr-96">
+                <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+
+
+                    <!-- Profile Header -->
+                    <div class="mb-8">
+                        <div class="md:flex md:items-center md:justify-between">
+                            <div class="min-w-0 flex-1">
+                                <h2 class="text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">Profile</h2>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Kelola informasi profile dan pengaturan akun Anda</p>
+                            </div>
+                            <div class="mt-4 flex md:ml-4 md:mt-0">
+                                <a href="" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    <i class="fas fa-edit -ml-0.5 mr-1.5 h-5 w-5"></i>
+                                    Edit Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Card -->
+                    <div class="overflow-hidden bg-white dark:bg-gray-800 shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <div class="sm:flex sm:items-center sm:justify-between">
+                                <div class="sm:flex sm:space-x-5">
+                                    <div class="flex-shrink-0">
+                                        <img class="mx-auto h-20 w-20 rounded-full" src="{{ asset('assets/img/profile.png') }}" alt="{{ $user->name }}">
+                                    </div>
+                                    <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+                                        <p class="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">{{ $user->name }}</p>
+                                        <p class="text-lg font-medium text-gray-700 dark:text-gray-500">{{ $user->email }}</p>
+                                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ $user->role }}</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+                        <!-- Personal Information -->
+                        <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                            <div class="px-4 py-5 sm:p-6">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Informasi Personal</h3>
+                                <div class="mt-5 border-t border-gray-200 dark:border-gray-700">
+                                    <dl class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Nama Lengkap</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->name }}</dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->email }}</dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Telepon</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->phone ?: '-' }}</dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Alamat</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->address ?: '-' }}</dd>
+                                        </div>
+                                        @if($user->bio)
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Bio</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->bio }}</dd>
+                                        </div>
+                                        @endif
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Information -->
+                        <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                            <div class="px-4 py-5 sm:p-6">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Informasi Akun</h3>
+                                <div class="mt-5 border-t border-gray-200 dark:border-gray-700">
+                                    <dl class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Role</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->role_display }}</dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
+                                            <dd class="mt-1 sm:col-span-2 sm:mt-0">
+                                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $user->status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300' }}">
+                                                    {{ $user->status_display }}
+                                                </span>
+                                            </dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Email Verified</dt>
+                                            <dd class="mt-1 sm:col-span-2 sm:mt-0">
+                                                @if($user->email_verified_at)
+                                                    <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        Terverifikasi
+                                                    </span>
+                                                @else
+                                                    <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300">
+                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                                                        Belum Terverifikasi
+                                                    </span>
+                                                @endif
+                                            </dd>
+                                        </div>
+                                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Bergabung</dt>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->created_at->format('d M Y') }}</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endsection
