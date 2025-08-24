@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use Illuminate\Http\Request;
 
 
 class BillController extends Controller
@@ -22,6 +23,20 @@ class BillController extends Controller
             ->withTrashed()
             ->find($id);
         return view('dashboard.bill.detail', compact('billDetail'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'total_amount' => 'required|numeric',
+        ]);
+
+        
+        Bill::find($id)->update($data);
+
+        toast('Consigment Berhasil!', 'success');
+        return redirect()->back();
     }
 
 

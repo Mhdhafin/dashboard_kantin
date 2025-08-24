@@ -20,7 +20,7 @@
                                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Kelola informasi profile dan pengaturan akun Anda</p>
                             </div>
                             <div class="mt-4 flex md:ml-4 md:mt-0">
-                                <a href="" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                <a onclick="document.getElementById('modal_profile_edit{{ $user->id }}').showModal()" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                     <i class="fas fa-edit -ml-0.5 mr-1.5 h-5 w-5"></i>
                                     Edit Profile
                                 </a>
@@ -90,7 +90,7 @@
                                     <dl class="divide-y divide-gray-200 dark:divide-gray-700">
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Role</dt>
-                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->role_display }}</dd>
+                                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:col-span-2 sm:mt-0">{{ $user->role }}</dd>
                                         </div>
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
@@ -128,4 +128,59 @@
                 </div>
             </div>
         </div>
+
+        <dialog id="modal_profile_edit{{ $user->id }}" class="modal px-4 py-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm mt-6 overflow-scroll">
+        <div class="modal-box">
+            <form method="dialog">
+                <button
+                    class="btn btn-sm btn-circle btn-ghost text-gray-900 dark:text-white absolute right-2 top-2">✕</button>
+            </form>
+            <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                   Edit Profile
+                </h3>
+
+            </div>
+            <form action="{{ route('users.store') }}" method="post"
+                class="mt-6 space-y-6">
+                @csrf
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+                    <div >
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                           Nama <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan nama reseller">
+                    </div>
+                    <div >
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Email anda">
+                    </div>
+                   
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex items-center justify-end pt-6 space-x-3 border-t border-gray-200 dark:border-gray-700">
+                    <button onclick="modal_profile_edit.close()" type="button"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
+                        id="cancel-button">
+                        <i class="fas fa-times mr-2"></i>
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 border border-transparent rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                        id="save-button">
+                        <i class="fas fa-save mr-2"></i>
+                        Simpan 
+                    </button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 @endsection

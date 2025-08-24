@@ -28,7 +28,7 @@
               </div>
 
               <!-- Login Form -->
-              <form class="space-y-6" action="/loginPost" method="POST" >
+              <form class="space-y-6" action="{{ route('login.post') }}" method="POST" >
                   @csrf
                   <div>
                       <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -119,6 +119,13 @@
               </form>
 
               <!-- Dark Mode Toggle -->
+               <div class="mt-8 flex justify-center">
+                 <button class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                     id="dark-mode-toggle" title="Toggle Dark Mode">
+                     <i class="text-gray-600 dark:text-gray-300 fas fa-sun dark:hidden" id="light-icon"></i>
+                     <i class="text-gray-300 fas fa-moon hidden dark:block" id="dark-icon"></i>
+                 </button>
+             </div>
              
           </div>
       </div>

@@ -81,6 +81,19 @@ class PaymentController extends Controller
 }
 
 
+    // public function update(StorePaymentRequest $request, $id) {
+
+    //     $consignment = $request->only('amount');
+
+    //     Payment::find($id)->update($consignment);
+
+    //     toast('Consignment Berhasil!', 'success');
+    //     return redirect()->route('payments.index');
+
+    // }
+
+
+
     public function destroy(string $id)
     {
         $id = Payment::findOrFail($id);

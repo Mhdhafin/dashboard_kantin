@@ -7,7 +7,7 @@
                             <i class="text-sm text-white fas fa-store"></i>
                         </div>
                         <div>
-                            <h2 class="font-semibold text-gray-800 dark:text-white">Kantin Reseller</h2>
+                            <h2 class="font-semibold text-gray-800 dark:text-white">Manajemen Kantin</h2>
                             <p class="text-xs text-gray-500 dark:text-gray-400">Dashboard</p>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     
                     <a href="/dashboard/resellers" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard/resellers') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg">
                         <i class="w-4  {{ Request::is('dashboard/resellers') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-users"></i>
-                        <span>Reseller</span>
+                        <span>Vendor</span>
                     </a>
                     <a href="/dashboard/products" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard/products') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg">
                         <i class="w-4  {{ Request::is('dashboard/products') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-box"></i>
@@ -70,7 +70,7 @@
                     <!-- Desktop Profile Dropdown -->
                     <div class="absolute bottom-full left-4 right-4 mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible transition-all duration-200 transform translate-y-2" id="desktop-profile-dropdown">
                         <div class="py-2">
-                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <a href="{{ route('users.index')}}" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
                                 <i class="w-4 mr-3 fas fa-user-circle"></i>
                                 Profile Saya
                             </a>
@@ -100,7 +100,7 @@
                             <i class="text-sm text-white fas fa-store"></i>
                         </div>
                         <div>
-                            <h2 class="font-semibold text-gray-800 dark:text-white">Kantin Reseller</h2>
+                            <h2 class="font-semibold text-gray-800 dark:text-white">Manajemen Kantin</h2>
                             <p class="text-xs text-gray-500 dark:text-gray-400">Dashboard</p>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     
                     <a href="/dashboard/resellers" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard/resellers') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg group mobile-menu-item">
                         <i class="w-4  {{ Request::is('dashboard/resellers') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-users"></i>
-                        <span>Reseller</span>
+                        <span>Vendor</span>
                     </a>
                     <a href="/dashboard/products" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard/products') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg group mobile-menu-item">
                         <i class="w-4  {{ Request::is('dashboard/products') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-box"></i>
@@ -164,7 +164,7 @@
                     <!-- Mobile Profile Dropdown -->
                     <div class="absolute bottom-full left-4 right-4 mb-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible transition-all duration-200 transform translate-y-2" id="mobile-profile-dropdown">
                         <div class="py-2">
-                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <a href="{{ route('users.index')}}" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
                                 <i class="w-4 mr-3 fas fa-user-circle"></i>
                                 Profile Saya
                             </a>

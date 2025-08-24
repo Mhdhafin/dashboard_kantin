@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticationRequest;
+use App\Http\Requests\PostRegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -38,10 +39,21 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function registerPost(Request $request)
+
+    public function registerPost(PostRegisterRequest $request)
     {
-        // Handle registration logic here
-        // Validate the request, create the user, etc.
+        $request->validated();
+
+       if (User::create($request->all())) {
+            $request->session()->regenerate();
+            
+        toast('Berhasil Membuat Akun!', 'success');
+        return redirect()->route('login');
+        }
+        
+        toast('Gagal Membuat Akun!', 'error');
+        return redirect()->back();
+
     }
 
     public function logout(Request $request, $id) {

@@ -29,19 +29,19 @@
              </div>
 
              <!-- Register Form -->
-             <form class="space-y-6" action="/registerPost" method="POST">
+             <form class="space-y-6" action="{{ route('register.post') }}" method="POST">
               @csrf
                      <div>
-                         <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                             Nama Depan
+                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                             Nama 
                          </label>
                          <div class="mt-1 relative">
                              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                  <i class="fas fa-user text-gray-400 dark:text-gray-500"></i>
                              </div>
-                             <input id="firstName" name="firstName" type="text" required
+                             <input id="name" name="name" type="text" required
                                  class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                                 placeholder="Nama depan">
+                                 placeholder="Nama Anda">
                          </div>
                      </div>
 
@@ -62,19 +62,6 @@
                      </div>
                  </div>
 
-                 <div>
-                     <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                         Nomor Telepon
-                     </label>
-                     <div class="mt-1 relative">
-                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                             <i class="fas fa-phone text-gray-400 dark:text-gray-500"></i>
-                         </div>
-                         <input id="phone" name="phone" type="tel" required
-                             class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                             placeholder="Contoh: 08123456789">
-                     </div>
-                 </div>
 
                  <div>
                      <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -93,7 +80,7 @@
                                  id="password-toggle"></i>
                          </button>
                      </div>
-                     <!-- Password Strength Indicator -->
+                     {{-- <!-- Password Strength Indicator -->
                      <div class="mt-2">
                          <div class="flex space-x-1">
                              <div class="h-1 flex-1 bg-gray-200 dark:bg-gray-600 rounded" id="strength-1"></div>
@@ -103,28 +90,9 @@
                          </div>
                          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" id="strength-text">Password harus
                              minimal 8 karakter</p>
-                     </div>
+                     </div> --}}
                  </div>
 
-                 <div>
-                     <label for="confirmPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                         Konfirmasi Password
-                     </label>
-                     <div class="mt-1 relative">
-                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                             <i class="fas fa-lock text-gray-400 dark:text-gray-500"></i>
-                         </div>
-                         <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password"
-                             required
-                             class="appearance-none block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                             placeholder="Ulangi password Anda">
-                         <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center"
-                             onclick="togglePassword('confirmPassword')">
-                             <i class="fas fa-eye text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
-                                 id="confirmPassword-toggle"></i>
-                         </button>
-                     </div>
-                 </div>
 
                  <div class="flex items-center">
                      <input id="terms" name="terms" type="checkbox" required
@@ -151,7 +119,7 @@
                      </button>
                  </div>
 
-                 <!-- Social Register -->
+                 {{-- <!-- Social Register -->
                  <div class="mt-6">
                      <div class="relative">
                          <div class="absolute inset-0 flex items-center">
@@ -176,7 +144,7 @@
                              <span class="ml-2">Facebook</span>
                          </button>
                      </div>
-                 </div>
+                 </div> --}}
              </form>
 
              <!-- Dark Mode Toggle -->

@@ -189,14 +189,14 @@
                                                 Detail
                                             </a>
                                             <a onclick="document.getElementById('modal_pembayaran{{ $bill->id }}').showModal()"
-                                                class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                class="flex items-center cursor-pointer px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
                                                 <i class="fas fa-credit-card mr-3 text-green-500"></i>
                                                 Bayar
                                             </a>
-                                            <a href="#"
-                                                class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                                <i class="fas fa-download mr-3 text-purple-500"></i>
-                                                Download
+                                            <a onclick="document.getElementById('modal_consignment{{ $bill->id }}').showModal()"
+                                                class="flex items-center cursor-pointer px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                <i class="fas fa-box mr-3 text-purple-500"></i>
+                                                Consignment
                                             </a>
                                             <div class="flex hover:bg-red-50 dark:hover:bg-red-900/20">
                                                 <form action="/dashboard/bills/{{ $bill->id }}" method="post">
@@ -308,6 +308,7 @@
                                 class="mt-2 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white  placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
 
                         </div>
+                        
 
 
                         <!-- Upload Gambar -->
@@ -375,6 +376,92 @@
                     <div
                         class="flex items-center justify-end pt-6 space-x-3 border-t border-gray-200 dark:border-gray-700">
                         <button onclick="modal_pembayaran.close()" type="button"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
+                            id="cancel-button">
+                            <i class="fas fa-times mr-2"></i>
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 border border-transparent rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                            id="save-button">
+                            <i class="fas fa-save mr-2"></i>
+                            Simpan Pembayaran
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    @endforeach
+
+     @foreach ($bills as $bill)
+        <dialog id="modal_consignment{{ $bill->id }}"
+            class="modal px-4 py-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm mt-6 overflow-scroll">
+            <div class="modal-box">
+                <form method="dialog">
+                    <button onclick="modal_consignment.close()"
+                        class="btn btn-sm btn-circle btn-ghost text-gray-900 dark:text-white absolute right-2 top-2">✕</button>
+                </form>
+                <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Consignment
+                    </h3>
+
+                </div>
+                <form action="{{ url('/dashboard/bills', $bill->id)}}" method="post" 
+                    class="mt-6 space-y-6">
+                    @csrf
+                    @method('PUT')
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <input type="hidden" name="bill_id" value="{{ $bill->id }}">
+
+
+                        <!-- Reseller -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Reseller
+                            </label>
+                            <input type="text" value="{{ $bill->reseller->name }}" readonly
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <!-- Reseller -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Tagihan
+                            </label>
+                            <div class="mt-1 relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 dark:text-gray-400 text-sm">Rp</span>
+                                </div>
+                                <input value="{{ number_format($bill->total_amount, '0', ',', '.') }}" readonly
+                                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="0">
+                            </div>
+                        </div>
+
+
+
+                        <!-- Harga -->
+                        <div>
+                            <label for="total_amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Consignment <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1 relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 dark:text-gray-400 text-sm">Rp</span>
+                                </div>
+                                <input type="number" id="total_amount" name="total_amount" required min="0"
+                                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="0">
+                            </div>
+                        </div>
+                  
+                    </div>
+
+
+                    <!-- Modal Footer -->
+                    <div
+                        class="flex items-center justify-end pt-6 space-x-3 border-t border-gray-200 dark:border-gray-700">
+                        <button onclick="modal_consignment.close()" type="button"
                             class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
                             id="cancel-button">
                             <i class="fas fa-times mr-2"></i>

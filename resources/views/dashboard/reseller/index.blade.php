@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Resellers')
+@section('title', 'Vendors')
 @section('subtitle', 'Manajemen data reseller anda!')
 
 
@@ -28,7 +28,7 @@
         <button onclick="my_modal_3.showModal()"
             class="flex items-center px-4 py-2 space-x-2 text-white bg-gray-800 dark:bg-gray-600 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 focus:ring-2 focus:ring-gray-500">
             <i class="fas fa-plus"></i>
-            <span>Tambah Reseller</span>
+            <span>Tambah Vendor</span>
         </button>
     </div>
 
@@ -38,7 +38,7 @@
         <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Reseller</p>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Vendors</p>
                     <p class="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{{ count($resellers) }}</p>
 
                 </div>
@@ -58,8 +58,8 @@
     <!-- Reseller Table -->
     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Daftar Reseller</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Kelola semua reseller yang terdaftar</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Daftar Vendors</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Kelola semua vendors yang terdaftar</p>
         </div>
 
         <!-- Desktop Table -->
@@ -69,7 +69,7 @@
                     <tr>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Reseller</th>
+                            Vendor</th>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Kontak</th>
@@ -162,7 +162,7 @@
             </form>
             <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Tambah Reseller 
+                    Tambah Vendor 
                 </h3>
 
             </div>
@@ -173,7 +173,7 @@
 
                     <div class="sm:col-span-2">
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Nama Reseller <span class="text-red-500">*</span>
+                            Nama Vendor <span class="text-red-500">*</span>
                         </label>
                         <input type="text" id="name" name="name" required
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
