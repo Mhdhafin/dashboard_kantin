@@ -25,8 +25,7 @@ class AuthController extends Controller
        if(Auth::attempt($credentials)) {
           $request->session()->regenerate();
         Alert::success( Auth::user()->role .', ' . Auth::user()->name , 'Selamat datang kembali!');
-        return redirect('/dashboard');
-        // return redirect()->route('dashboard.index'); // Adjust this route as necessary
+        return redirect()->route('dashboard.index');
        }
 
         toast('Username atau Password Salah', 'error');

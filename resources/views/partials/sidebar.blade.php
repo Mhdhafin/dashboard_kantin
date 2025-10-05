@@ -17,8 +17,8 @@
                 <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
                     <p class="mb-3 text-xs font-medium tracking-wider text-gray-400 dark:text-gray-500 uppercase">Menu Utama</p>
                     
-                    <a href="/dashboard" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg">
-                        <i class="w-4  {{ Request::is('dashboard') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-chart-bar"></i>
+                    <a href="/" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('/') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg">
+                        <i class="w-4  {{ Request::is('/') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-chart-bar"></i>
                         <span>Dashboard</span>
                     </a>
                     
@@ -113,8 +113,8 @@
                 <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
                     <p class="mb-3 text-xs font-medium tracking-wider text-gray-400 dark:text-gray-500 uppercase">Menu Utama</p>
                     
-                    <a href="/dashboard" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('dashboard') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg group mobile-menu-item">
-                        <i class="w-4  {{ Request::is('dashboard') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-chart-bar"></i>
+                    <a href="/" class="flex items-center px-3 py-2 space-x-3 font-medium {{ Request::is('/') ? 'text-blue-700 dark:text-blue-400 bg-blue-50' : 'text-gray-600 dark:text-gray-300  hover:bg-gray-50 dark:hover:bg-gray-700 '}}   rounded-lg group mobile-menu-item">
+                        <i class="w-4  {{ Request::is('/') ? 'text-blue-700' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 '}}  fas fa-chart-bar"></i>
                         <span>Dashboard</span>
                     </a>
                     

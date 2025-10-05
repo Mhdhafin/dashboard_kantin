@@ -106,7 +106,7 @@
         </div>
 
         <!-- Desktop Table -->
-        <div class="{{ $bills->count() > 5 ? 'overflow-x-auto' : '' }}">
+        <div class="overflow-x-auto">
             <table class="w-full ">
                 <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>

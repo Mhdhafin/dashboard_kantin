@@ -46,7 +46,7 @@
         </div>
 
         <!-- Table -->
-        <div class="{{ $orders->count() > 5 ? 'overflow-x-auto' : '' }}">
+        <div class="{{ $orders->count() > 3 ? 'overflow-x-auto' : 'overflow-y-hidden' }}">
             <table class="min-w-full   divide-gray-200 dark:divide-gray-700">
                 <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>

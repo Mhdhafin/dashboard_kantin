@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
 
         $topResellers = Reseller::whereHas('bill', function ($query) {
             $query->where('amount_paid', '>', 0);
