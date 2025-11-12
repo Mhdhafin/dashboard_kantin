@@ -13,106 +13,109 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 class ExportController extends Controller
 {
     public function exportPayments()
-  {
-    $spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
-// Set header kolom Excel
-$sheet->setCellValue('A1', 'No');
-$sheet->setCellValue('B1', 'Reseller');
-$sheet->setCellValue('C1', 'Tanggal Pembayaran');
-$sheet->setCellValue('D1', 'Produk');
-$sheet->setCellValue('E1', 'Jumlah');
-$sheet->setCellValue('F1', 'Harga Produk');
-$sheet->setCellValue('G1', 'Jumlah Pembayaran');
+        // Set header kolom Excel
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Reseller');
+        $sheet->setCellValue('C1', 'Tanggal Pembayaran');
+        $sheet->setCellValue('D1', 'Produk');
+        $sheet->setCellValue('E1', 'Jumlah');
+        $sheet->setCellValue('F1', 'Harga Produk');
+        $sheet->setCellValue('G1', 'Jumlah Pembayaran');
 
-// Styling untuk header (baris 1)
-$headerStyle = [
-    'font' => ['bold' => true],
-    'fill' => [
-        'fillType' => Fill::FILL_SOLID,
-        'startColor' => ['rgb' => 'D9E1F2'],
-    ],
-    'alignment' => [
-        'horizontal' => Alignment::HORIZONTAL_CENTER,
-        'vertical' => Alignment::VERTICAL_CENTER,
-        'wrapText' => true,
-    ],
-    'borders' => [
-        'allBorders' => ['borderStyle' => Border::BORDER_THIN],
-    ],
-];
+        // Styling untuk header (baris 1)
+        $headerStyle = [
+            'font' => ['bold' => true],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'D9E1F2'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+            'borders' => [
+                'allBorders' => ['borderStyle' => Border::BORDER_THIN],
+            ],
+        ];
 
-$sheet->getStyle('A1:G1')->applyFromArray($headerStyle);
-$sheet->getRowDimension(1)->setRowHeight(25);
+        $sheet->getStyle('A1:G1')->applyFromArray($headerStyle);
+        $sheet->getRowDimension(1)->setRowHeight(25);
 
-// Ambil data pembayaran
-$payments = Payment::with(['bill.reseller', 'bill.sale.saleItems.product'])->get();
+        // Ambil data pembayaran
+        $payments = Payment::with(['bill.reseller', 'bill.sale.saleItems.product'])->get();
 
-$row = 2; // Mulai dari baris ke-2 setelah header
-foreach ($payments as $index => $payment) {
-    $resellerName = $payment->bill->reseller->name ?? '-';
-    $paymentAmount = number_format($payment->amount, 2, ',', '.');
-    $tanggal = \Carbon\Carbon::parse($payment->paid_at)->format('d-m-Y');
+        $row = 2; // Mulai dari baris ke-2 setelah header
+        foreach ($payments as $index => $payment) {
+            $resellerName = $payment->bill->reseller->name ?? '-';
+            $paymentAmount = number_format($payment->amount, 2, ',', '.');
+            $tanggal = \Carbon\Carbon::parse($payment->paid_at)->format('d-m-Y');
 
-    $productRows = [];
-    foreach ($payment->bill->sale as $sale) {
-        foreach ($sale->saleItems as $item) {
-            $productRows[] = [
-                'product' => $item->product->name ?? '-',
-                'qty' => $item->quantity,
-                'price' => number_format($item->product->price, 2, ',', '.'),
-            ];
+            $productRows = [];
+            foreach ($payment->bill->sale as $sale) {
+                foreach ($sale->saleItems as $item) {
+                    $productRows[] = [
+                        'product' => $item->product->name ?? '-',
+                        'qty' => $item->quantity,
+                        'price' => number_format($item->product->price, 2, ',', '.'),
+                    ];
+                }
+            }
+
+            $firstProduct = true;
+            foreach ($productRows as $product) {
+                $sheet->setCellValue('A' . $row, $firstProduct ? $index + 1 : '');
+                $sheet->setCellValue('B' . $row, $firstProduct ? $resellerName : '');
+                $sheet->setCellValue('C' . $row, $firstProduct ? $tanggal : '');
+                $sheet->setCellValue('D' . $row, $product['product']);
+                $sheet->setCellValue('E' . $row, $product['qty']);
+                $sheet->setCellValue('F' . $row, $product['price']);
+                $sheet->setCellValue('G' . $row, $firstProduct ? $paymentAmount : '');
+
+                // Center-align jumlah dan harga
+                foreach (['E', 'F', 'G'] as $col) {
+                    $sheet
+                        ->getStyle($col . $row)
+                        ->getAlignment()
+                        ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                }
+
+                // Tambahkan border dan wrapText ke semua cell di baris ini
+                foreach (range('A', 'G') as $col) {
+                    $sheet->getStyle($col . $row)->applyFromArray([
+                        'alignment' => [
+                            'wrapText' => true,
+                            'vertical' => Alignment::VERTICAL_CENTER,
+                        ],
+                        'borders' => [
+                            'allBorders' => ['borderStyle' => Border::BORDER_THIN],
+                        ],
+                    ]);
+                }
+
+                $row++;
+                $firstProduct = false;
+            }
         }
-    }
 
-    $firstProduct = true;
-    foreach ($productRows as $product) {
-        $sheet->setCellValue('A' . $row, $firstProduct ? $index + 1 : '');
-        $sheet->setCellValue('B' . $row, $firstProduct ? $resellerName : '');
-        $sheet->setCellValue('C' . $row, $firstProduct ? $tanggal : '');
-        $sheet->setCellValue('D' . $row, $product['product']);
-        $sheet->setCellValue('E' . $row, $product['qty']);
-        $sheet->setCellValue('F' . $row, $product['price']);
-        $sheet->setCellValue('G' . $row, $firstProduct ? $paymentAmount : '');
-
-        // Center-align jumlah dan harga
-        foreach (['E', 'F', 'G'] as $col) {
-            $sheet->getStyle($col . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        }
-
-        // Tambahkan border dan wrapText ke semua cell di baris ini
+        // Auto-size kolom
         foreach (range('A', 'G') as $col) {
-            $sheet->getStyle($col . $row)->applyFromArray([
-                'alignment' => [
-                    'wrapText' => true,
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                ],
-                'borders' => [
-                    'allBorders' => ['borderStyle' => Border::BORDER_THIN],
-                ],
-            ]);
+            $sheet->getColumnDimension($col)->setAutoSize(true);
         }
 
-        $row++;
-        $firstProduct = false;
+        // Export ke file Excel
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'payments_' . now()->format('Ymd_His') . '.xlsx';
+        $filePath = storage_path($fileName);
+        $writer->save($filePath);
+
+        // Unduh dan hapus file setelah dikirim
+        return response()->download($filePath)->deleteFileAfterSend(true);
     }
-}
-
-// Auto-size kolom
-foreach (range('A', 'G') as $col) {
-    $sheet->getColumnDimension($col)->setAutoSize(true);
-}
-
-// Export ke file Excel
-$writer = new Xlsx($spreadsheet);
-$fileName = 'payments_' . now()->format('Ymd_His') . '.xlsx';
-$filePath = storage_path($fileName);
-$writer->save($filePath);
-
-// Unduh dan hapus file setelah dikirim
-return response()->download($filePath)->deleteFileAfterSend(true);
-  }
     public function exportOrders()
     {
         $spreadsheet = new Spreadsheet();
